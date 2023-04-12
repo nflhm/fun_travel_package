@@ -1,4 +1,4 @@
-package com.example.demo;
+package id.co.travel.fun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
