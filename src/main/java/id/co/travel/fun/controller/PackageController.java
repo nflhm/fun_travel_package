@@ -18,8 +18,9 @@ public class PackageController {
     PackageService packageService;
 
     @GetMapping("/")
-    public @ResponseBody List<Package> selectAllPackage() {
-        return packageService.allPackages();
+    public @ResponseBody List<Package> selectAllPackage(@RequestParam("page") int page,
+                                                        @RequestParam("size") int size) {
+        return packageService.allPackagesPage(page, size);
     }
     @GetMapping("/id")
     public @ResponseBody Package selectUnique(@RequestParam("id") int id) {
@@ -33,7 +34,7 @@ public class PackageController {
                              @RequestParam("desc") String packageDesc) {
         Package model = new Package(0, packageName, packagePrice, packageDesc);
         packageService.insert(model);
-        return "redirect:/package/";
+        return "redirect:/package/?page=0&size=10";
     }
     @GetMapping("/update")
     public String updateEmployee(@RequestParam("id") int id,
@@ -42,7 +43,7 @@ public class PackageController {
                                  @RequestParam("desc") String packageDesc) {
         Package model = new Package(id, packageName, packagePrice,packageDesc);
         packageService.update(model);
-        return "redirect:/package/";
+        return "redirect:/package/?page=0&size=10";
     }
 
     @GetMapping("/delete")
@@ -50,6 +51,6 @@ public class PackageController {
         Package model = new Package();
         model.setId(id);
         packageService.delete(model);
-        return "redirect:/package/";
+        return "redirect:/package/?page=0&size=10";
     }
 }
